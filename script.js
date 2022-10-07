@@ -12,12 +12,32 @@ var lowercasechar = "abcdefghijklmnopqrstuvwxyz".split("");
 var numberchar = "1234567890".split("");
 var spclchar = "!@#$%&?".split("");
 var passPool = [];
+var userPassArray = [];
+
+// This function will convert an array to a string with no commas.
+function noSpaceStringify (array) {
+  var stringedArrayWCommas = array.toString();
+  var stringedArray = stringedArrayWCommas.replace(/,/g, '')
+  return stringedArray;
+}
+
+function randItem (array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  var randomItem = array[randomIndex];
+  return randomItem;
+}
+
+function noSpaceStringify (array) {
+  var stringedArrayWCommas = array.toString();
+  var stringedArray = stringedArrayWCommas.replace(/,/g, '')
+  return stringedArray;
+}
 
 // Write password to the #password input
 function writePassword(event) {
   event.preventDefault()
-  var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  var passwordText = generatePassword();
   function generatePassword() {
 
     passLength = prompt("Please select the length you would like for your password (between 8 and 128 characters).");
@@ -58,18 +78,23 @@ function writePassword(event) {
     } else {
       alert ("Your password will not contain numbers.")
     }
-    // The while loop here checks for the passlength; while the length of the array it creates is less than the 
-    // passlength, it will keep pulling characters and adding them to the array that will eventually become the password.
-    var userPass = [];
-    while (userPass.length < passLength) {
-      
-    } 
-
-  }
-  passwordText.value = password;
-
+    console.log(passLength);
+        var passPoolString = noSpaceStringify(passPool);
+    console.log(passPoolString);
+    // The for loop here checks for the passlength; while the length of the string it creates is less than the 
+    // passlength, it will keep pulling characters and adding them to the string that will eventually become the password.
+      var userPassString = "";
+      var passPoolLength = passPoolString.length;
+      for (var i=0; i < passLength; i++) {
+        userPassString += passPoolString.charAt(Math.floor(Math.random() * passPoolLength));
+      }
+      console.log(userPassString);
+      console.log(userPassString.length);
+      var passwordText = userPassString;
+    }
+    
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-console.log(passPool);
+
