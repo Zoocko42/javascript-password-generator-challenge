@@ -43,8 +43,8 @@ function writePassword(event) {
     if (passLength === null){
       return;
     } else if (passLength < 8 || passLength > 128) {
-      alert ("I'm sorry, please select a length between 8 and 128 characters.");
-      generatePassword();
+      alert ("I'm sorry, next time please select a length between 8 and 128 characters.");
+      return;
     } else {
       alert ("Gotcha, so you want a password that is " + passLength + " characters long.");
     }
